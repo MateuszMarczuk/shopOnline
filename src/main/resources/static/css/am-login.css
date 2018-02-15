@@ -1,0 +1,23 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+
+    background-color: #eceeef;
+}
+
+.container {
+    height: 100vh;
+}
+
+.login-header {
+    margin-bottom: 40px;
+    color: #aaaaaaaa;
+}
+
+.footer {
+    padding: 10px;
+}
+
+.communicate {
+    top: 10px;
+}
