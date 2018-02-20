@@ -2,11 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-<h1 th:text="${title}"></h1>
-<nav th:replace="fragments :: navigation"></nav>
-<p th:unless="${products}">Empty stock...</p>
-<ul>
-    <li th:each="product : ${products}" th:text="${product}"></li>
-</ul>
+    <div class="container-fluid">
+        <h1 th:text="${title}">Default title</h1>
+        <nav th:replace="fragments :: navigation"></nav>
+        <p th:unless="${products} and ${products.size()}">Empty stock...</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            <tr>
+                <td th:each="product: ${products}"></td>
+                <td th:text="${name == null ? '' : product.name}"></td>
+                <td th:text="${description == null ? '' : product.description}"></td>
+            </tr>
+            
+            </tbody>
+        </table>
+        
+    </div>
+    
 </body>
 </html>
