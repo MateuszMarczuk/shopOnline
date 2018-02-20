@@ -2,9 +2,12 @@ package com.shop.controller;
 
 
 
+import com.shop.models.Product;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -22,7 +26,7 @@ import java.util.ArrayList;
 @Controller
 public class productController {
 
-    static ArrayList<String> products = new ArrayList<>();
+    static ArrayList<Product> products = new ArrayList<>();
 
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
@@ -41,10 +45,28 @@ public class productController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddProduct(@RequestParam String productName){
-        products.add(productName);
+    public String processAddProduct(@RequestParam String productName, @RequestParam String productDescription){
+        Product newProduct = new Product(productName, productDescription);
+        products.add(newProduct);
         return "redirect:/product";
     }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    public String removeProductForm(Model model){
+        model.addAttribute("products",products);
+        model.addAttribute("title","Remove your item");
+        return "removeProduct";
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String processedRemoveProduct(@RequestParam ArrayList<String> product){
+        for (String eproduct: product){
+            products.remove(eproduct);
+        }
+        return "redirect:/product";
+    }
+
+
 
 
 //

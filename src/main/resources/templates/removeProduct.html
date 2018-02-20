@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div class="container-fluid">
+    <h1 th:text="${title}">Default title</h1>
+    
+    <nav th:replace="fragments :: #navigation"></nav>
+    
+    <form method="post">
+        <div th:each="product : ${products}" class="checkbox">
+            <input type="checkbox" name="product" th:value="${product.name}" th:id="${product.name}"/>
+            <label th:for="${product.name}" th:text="${product.name}"></label>
+            <br />
+        </div>
+        <input type="submit" class="btn btn-success" value="Remove Product" />
+    </form>
+</div>
+
+</body>
+</html>
