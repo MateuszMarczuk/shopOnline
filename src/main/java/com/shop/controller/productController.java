@@ -4,6 +4,7 @@ package com.shop.controller;
 
 import com.shop.models.Product;
 import com.shop.models.ProductData;
+import com.shop.models.ProductState;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -39,6 +40,7 @@ public class productController {
     public String addProductForm(Model model){
         model.addAttribute("title", "Add product");
         model.addAttribute( new Product());
+        model.addAttribute("productState", ProductState.values());
         return "addProduct";
     }
 
