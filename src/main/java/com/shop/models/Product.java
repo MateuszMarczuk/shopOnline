@@ -1,6 +1,10 @@
 package com.shop.models;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -11,7 +15,12 @@ import lombok.Data;
 @Data
 public class Product {
 
+    @NotNull
+    @Size(min = 3, max = 20, message = "product name must have more than 3 characters and less than 20")
     private String name;
+
+    @NotNull
+    @Size(min = 3, max = 50,message = "Description must have more than 3 characters and less than 50")
     private String description;
     private int productId;
     public static int nextId = 1;

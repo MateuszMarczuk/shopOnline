@@ -6,10 +6,13 @@ import com.shop.models.Product;
 import com.shop.models.ProductData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 
@@ -35,11 +38,16 @@ public class productController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addProductForm(Model model){
         model.addAttribute("title", "Add product");
+        model.addAttribute( new Product());
         return "addProduct";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddProduct(@ModelAttribute Product newProduct){
+    public String processAddProduct(@ModelAttribute @Valid Product newProduct, Errors errors, Model model){
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Add product");
+            return "addProduct";
+        }
         ProductData.add(newProduct);
         return "redirect:/product";
     }
