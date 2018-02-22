@@ -6,6 +6,7 @@ import com.shop.models.Product;
 import com.shop.models.ProductData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,8 +39,7 @@ public class productController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processAddProduct(@RequestParam String productName, @RequestParam String productDescription){
-        Product newProduct = new Product(productName, productDescription);
+    public String processAddProduct(@ModelAttribute Product newProduct){
         ProductData.add(newProduct);
         return "redirect:/product";
     }
