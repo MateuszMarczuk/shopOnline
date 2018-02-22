@@ -22,6 +22,10 @@ public class Product {
     @NotNull
     @Size(min = 3, max = 50,message = "Description must have more than 3 characters and less than 50")
     private String description;
+
+
+    private ProductState state;
+
     private int productId;
     public static int nextId = 1;
 
