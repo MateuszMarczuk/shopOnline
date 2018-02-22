@@ -6,12 +6,12 @@
 <div class="container-fluid">
     <h1 th:text="${title}">Default title</h1>
     
-    <nav th:replace="fragments :: #navigation"></nav>
+    <nav th:replace="fragments :: navigation"></nav>
     
     <form method="post">
-        <div th:each="product : ${products}" class="checkbox">
-            <input type="checkbox" name="product" th:value="${product.name}" th:id="${product.name}"/>
-            <label th:for="${product.name}" th:text="${product.name}"></label>
+        <div th:each="product : ${products}" class="custom-control custom-checkbox my-1 mr-sm-2">
+            <input type="checkbox" class="custom-control-input" name="productIds" th:value="${product.productId}" th:id="${product.productId}"/>
+            <label th:for="${product.productId}" th:text="${product.name}"></label>
             <br />
         </div>
         <input type="submit" class="btn btn-success" value="Remove Product" />

@@ -1,9 +1,7 @@
 package com.shop.models;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 
 /**
  * Created by Mateusz Marczuk
@@ -15,6 +13,13 @@ public class Product {
 
     private String name;
     private String description;
+    private int productId;
+    public static int nextId = 1;
+
+    public Product(){
+        productId = nextId;
+        nextId++;
+    }
 
     public Product(String name, String description) {
         this.name = name;
